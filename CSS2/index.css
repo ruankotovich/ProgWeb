@@ -35,3 +35,18 @@ body {
 .almostopaque {
     opacity: 0.9;
 }
+
+.ball {
+    cursor: pointer;
+    border-radius: 100%;
+    border-style: solid;
+    border-color: springgreen;
+    background-color: springgreen;
+    text-align: center;
+    font-size: 4vw;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width:5vw; 
+    height:5vw;
+}
