@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+</head>
+
+<body>
+    <main contenteditable="true">
+        <div class="box" id="editable">
+            text
+        </div>
+    </main>
+</body>
+<script>
+    document.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter' && e.target.tagName === 'MAIN') {
+            console.log(e);
+        }
+    });
+</script>
+
+</html>
