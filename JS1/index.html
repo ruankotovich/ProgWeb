@@ -1,0 +1,79 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+</head>
+
+<style>
+table, tr, td{
+  border: 1px solid black;
+  text-align: center;
+}
+table{
+  width: 18%;
+  float: left;
+  margin: 1%;
+}
+
+.td_inner{
+  width: 70%;
+}
+
+.td_inner:hover{
+  background-color: #dddddd;
+  cursor: crosshair;
+}
+
+.td_title{
+  font-weight: bold;;
+}
+
+.td_title:hover{
+  background-color: #000000;
+  color: #ffffff;
+  cursor: crosshair;
+}
+</style>
+
+<body>
+
+  <script>
+
+  function tableOf(number){
+
+    document.write(
+      '<table>'+
+      '<tr>'+
+      '<td class="td_title" colspan="2">'+
+      'Tabuada do '+number+
+      '</td>'+
+      '</tr>'
+    );
+
+    for(let index of Array.from({length:10}, (x,i)=>i+1)) {
+      document.write(
+        '<tr>'+
+        '<td class="td_inner">'+
+        number+' × '+index+
+        '</td>'
+      );
+
+      document.write(
+        '<td>'+
+        (number*index)+''+
+        '</td>'+
+        '</tr>'
+      );
+    }
+
+    document.write(
+      '</table>'
+    );
+  }
+
+  for(let index of Array.from({length:10}, (x,i)=>i+1)) {
+    tableOf(index);
+  }
+
+  </script>
+</body>
+</html>
