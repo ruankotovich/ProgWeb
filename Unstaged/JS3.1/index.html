@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<style>
+    .bar {
+        background-color: red;
+        width: 10px;
+        height: 10px;
+        float: left;
+        margin: 5px;
+        bottom: 0px;
+    }
+
+    input {
+        border: solid;
+    }
+</style>
+
+<body>
+    Altura das Barras:
+    <input type="text" id="bar1_height" />
+    <input type="text" id="bar2_height" />
+    <input type="text" id="bar3_height" />
+    <input type="text" id="bar4_height" />
+    <br> Largura das Barras:
+    <input type="text" id="bar_width" />
+    <br>
+
+    <div style="position: relative; width: 100%; height: 100%">
+        <div class="bar" id="bar1"></div>
+        <div class="bar" id="bar2"></div>
+        <div class="bar" id="bar3"></div>
+        <div class="bar" id="bar4"></div>
+    </div>
+</body>
+<script>
+
+    class Bar {
+
+        _updateHeight() {
+            this.container.style.height = `${parseInt(this.heightController.value)}px`;
+        }
+        _updateWidth(pWidth) {
+            this.container.style.width = `${pWidth}px`;
+        }
+
+        constructor(pDOMel, pDOMcont) {
+            this.container = pDOMel;
+            this.heightController = pDOMcont;
+
+            this.heightController.onkeyup = (el) => {
+                this._updateHeight();
+            }
+
+            this._updateHeight();
+
+        }
+    }
+
+    let bars = [
+        new Bar(document.getElementById("bar1"), document.getElementById("bar1_height")),
+        new Bar(document.getElementById("bar2"), document.getElementById("bar2_height")),
+        new Bar(document.getElementById("bar3"), document.getElementById("bar3_height")),
+        new Bar(document.getElementById("bar4"), document.getElementById("bar4_height"))
+    ];
+
+    function updateBarsWidth(e) {
+        for (let el of bars) {
+            el._updateWidth(parseInt(e.value));
+        }
+    }
+
+    let widthController = document.getElementById("bar_width");
+
+    widthController.onkeyup = (e) => {
+        updateBarsWidth(widthController);
+    }
+
+    updateBarsWidth(widthController);
+
+</script>
+
+</html>
