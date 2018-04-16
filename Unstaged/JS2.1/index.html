@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    Informe o raio:
+    <input type="text" id="radius" />
+    <input type="button" id="okButton" value="Ok" />
+    <br> Área do Círculo:
+    <input type="text" id="area" readonly/>
+    <br> Circunferência:
+    <input type="text" id="length" readonly/>
+</body>
+
+<script>
+    let radius = document.getElementById('radius');
+    let area = document.getElementById('area');
+    let length = document.getElementById('length');
+    let okButton = document.getElementById('okButton');
+
+    okButton.onclick = (evt) => {
+        let curRadius;
+        if (curRadius = parseFloat(radius.value)) {
+            area.value = (Math.pow(parseFloat(radius.value), 2) * Math.PI).toFixed(2);
+            length.value = (parseFloat(radius.value) * 2 * Math.PI).toFixed(2);
+        } else {
+            console.log("Invalid Radius");
+            area.value = length.value = "INVALID RADIUS";
+        }
+    };
+</script>
+
+</html>
