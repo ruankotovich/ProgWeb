@@ -3,15 +3,20 @@
 <head>
     <meta charset="utf-8" />
 </head>
+<style>
+    label {
+        display: block;
+    }
+</style>
 
 <body>
     <form name="radiusForm">
-        Informe o raio:
+        <label>Informe o raio:</label>
         <input type="text" name="radius" />
         <input type="button" name="okButton" value="Ok" />
-        <br> Área do Círculo:
+        <label>Área do Círculo:</label>
         <input type="text" name="area" readonly/>
-        <br> Circunferência:
+        <label>Circunferência:</label>
         <input type="text" name="length" readonly/>
     </form>
 </body>
