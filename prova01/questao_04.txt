@@ -1,0 +1,25 @@
+Hoisting diz respeito à uma característica da linguagem de adiantar(hoist) a declaração de uma variável para o inicio do escopo no qual ela está inserida.
+
+Essa característica permite a utilização da variável mesmo que esta tenha sido declarada (mas não atribuída com o operador =)
+mesmo antes de "conhecer" sua assinatura (virtualmente, uma vez que o hoisting já permite o conhecimento da variável internamente)
+
+O hoisting afeta qualquer artefato atribuível (funções, variáveis,...)
+
+
+Um exemplo de hoisting com funções:
+
+```
+1. console.log(cheeki());
+2.
+3. function cheeki(){
+4. return "breeki iv damke";
+5. }
+```
+A função `cheeki` é chamada na linha 1, embora sua "declaração" tenha sido realizada na linha `3`.
+O comportamento hoist adquirido faz com que a função `cheeki` seja conhecida pela linha 1 já que a função é virtualmente declarada na linha 3, mas
+efetivamente declarada no inicio do escopo (antes da linha 1, ou efetivamente na linha 1)
+
+O hoisting afeta a interpretação do código de uma maneira parecida com a de um header(.h) incluído em C+ afeta um arquivo .cpp, o header faz com que a assinatura
+da função(ou variável) seja conhecida antes mesmo da sua definição;
+
+Em Javascript, além da assinatura ser conhecida, a definição também é, uma vez que, de fato, a função(ou variavel) é declarada no inicio do escopo;
