@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Esfera</title>
+  <style>
+  label{
+    text-align: right;
+    display: inline-block;
+    width: 20%;
+  }
+  </style>
+</head>
+<body>
+  <label for="raio">Raio da Esfera</label>
+  <input id="ipRaio" name="raio" type="text"/>
+  <input id="bCalcular" type="button" value="Calcular"/>
+  <br>
+
+  <label for="area">Área</label>
+  <input id="ipArea" name="area" type="text" readonly/>
+  <br>
+
+  <label for="volume">Volume</label>
+  <input id="ipVolume" name="volume" type="text" readonly/>
+
+</body>
+<script>
+let bCalculate = document.getElementById('bCalcular');
+let ipRaio = document.getElementById('ipRaio');
+let ipArea = document.getElementById('ipArea');
+let ipVolume = document.getElementById('ipVolume');
+
+bCalcular.onclick = (e)=>{
+  let radius = parseInt(ipRaio.value);
+  if(radius >0){
+    ipArea.value = ((Math.pow(radius, 2)*Math.PI) * 4.0).toFixed(2);
+    ipVolume.value = (4.0/3.0 * Math.PI * Math.pow(radius,3)).toFixed(2);
+  }else{
+    ipVolume.value = ipArea.value = "Indefinido";
+  }
+};
+</script>
+</html>
