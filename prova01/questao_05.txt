@@ -1,0 +1,134 @@
+Histórico de commis :
+
+--- START ---
+
+commit 66878f6777fdc95c472cf83efd6797aca4a731c4
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Apr 25 08:42:12 2018 -0400
+
+    [INS] Q4
+
+commit 9a759f321b526327cbb844b421d3f25372fab55e
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Apr 25 08:33:07 2018 -0400
+
+    [INS] Q3
+
+commit e09a376d602ce2b318b73e674c40d7b72e3c5668
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Apr 25 08:25:48 2018 -0400
+
+    [INS] Q2
+
+commit 9b51aafd88b7886ad6036d933bae773f43acbe2e
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Apr 25 08:08:45 2018 -0400
+
+    [INS] Q1
+
+commit e9ed8b4adb66cedbd67864ecdfec468a8c0f3b65
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Apr 23 08:12:32 2018 -0400
+
+    [INS] JS5 (extracted from Testes/JS3.1)
+
+commit 115c16a3c57cd7fa7d119608602a2dfd82bfae68
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Apr 16 09:32:10 2018 -0400
+
+    [INS] Unstaged Exercise JS5
+
+commit 24fc6ceb62879610a7520a5dbd236b98b6b1549e
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Apr 16 09:16:06 2018 -0400
+
+    [STG] Exercise JS4
+
+commit 5923ba0c25bbaad6faf51b73a9559ef636936a65
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Apr 16 08:16:52 2018 -0400
+
+    [INS] Unstaged exercise
+
+commit e343f356e797e45761b1774f9d8b97b05d4b680f
+Author: Kotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Apr 16 07:53:01 2018 -0400
+
+    [INS] JS3 Exercise
+
+commit fbfb4a988f0b3a5665d0bda67349ebb3d2261f73
+Author: ruankotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Apr 9 09:28:18 2018 -0500
+
+    [INS] JS2
+
+commit a98d2837852376a8d5f6cbd7e62fd414eb0b8c04
+Author: ruankotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Apr 4 20:42:01 2018 -0500
+
+    [FXD] string literal
+
+commit fbc0c7017a6ddbb66ca7ae5981f6a5602e5b75f4
+Author: ruankotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Apr 4 10:08:21 2018 -0500
+
+    Added JS1 exercise
+
+commit 572c6b1d1b8c2da16e0617f1f3ce47d6575d3638
+Author: ruankotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Mar 28 09:38:35 2018 -0500
+
+    [INS] Tests
+
+commit 96e3b8e8422a8991e3536845d8e98fa310fa4509
+Author: ruankotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Mar 28 09:03:32 2018 -0500
+
+    [TST] Floating on CSS3
+
+commit da5c18166c386a8f4dcc32ff1ecc11abc4fbeb3c
+Author: ruankotovich <rggb@icomp.ufam.edu.br>
+Date:   Wed Mar 28 08:57:08 2018 -0500
+
+    [INS] CSS3 Exercise / [INS] editor test
+
+commit 2871ed1113feaa7441296cb3e19e882566cd033c
+Author: ruankotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Mar 26 09:41:00 2018 -0500
+
+    [INS] CSS Exercises
+
+commit f226704ba4e9ed1e352d72d558add440b10496ef
+Author: xYahKotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Mar 19 09:11:03 2018 -0500
+
+    Adding exercises
+
+commit b2fc35f172b56e1f59a656833123a85e01da1c1f
+Author: xYahKotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Mar 19 09:08:36 2018 -0500
+
+    Updated Readme
+
+commit b38dccdc013d5f89f3fc7ff092da9fdd9bc5659b
+Author: xYahKotovich <rggb@icomp.ufam.edu.br>
+Date:   Mon Mar 19 09:05:43 2018 -0500
+
+    first commit
+
+--- END ---
+
+
+Questões:
+
+a) o comando `git status` tem como objetivo mostrar as transformações atuais (deleção, inserção, modificação) de arquivos no workspace em relação ao staging area.
+
+O comando auxilia na sumarização do que foi feito entre o workspace e o stagind area até o momento, antes de dar o commit.
+
+Além disso, o `git status` também auxilia na verificação do status atual do nó mais acima, verificando se está em paridade com o repositório remoto.
+
+b) O arquivo `.gitignore` tem como objetivo armazenar um conjunto de arquivos que não desejamos que sejam administrado pelo git, ou seja, que não desejamos que façam parte do repositório (arquivos ignorados)
+
+Esse comportamento é desejado uma vez que, em certos cenários, possuímos arquivos gerados automaticamente com alguma informação relativa ao computador atual que está administrando
+o repositório local, e isso não é do interesse de quem acessa o repositório remoto, já que isso pode causar conflito nos arquivos gerados entre os nós que compartilham
+o repositório remoto.
