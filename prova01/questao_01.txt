@@ -1,4 +1,8 @@
-1 - Linha 17 : A tag <strong> não foi fechada , então é necessária a sua compleção com </strong>;
-2 - Linha 08 : Os atributos em CSS são atribuidos com o operador `:`, e nessa linha estão sendo atribuídos com o operador`=`;
-3 - Linha 09 : Os atributos em CSS são atribuidos com o operador `:`, e nessa linha estão sendo atribuídos com o operador`=`;
-4 - Linha 25 : O objeto `that` não existe, talvez fosse desejado utilizar o objeto `this`, que é uma declaração `static final` do escopo atual;
+Linha 08 : Os valores em CSS são atribuídos com o operador `:`, e nessa linha estão sendo atribuídos com o operador`=`
+           Solução : atribuir os valores com o operador `:`
+Linha 09 : Os atributos em CSS são atribuidos com o operador `:`, e nessa linha estão sendo atribuídos com o operador`=`;
+           Solução : atribuir os valores com o operador `:`
+Linha 17 : A tag <strong> não foi fechada, podendo causar um erro na renderização da página ou até um comportamento inesperado;
+           Solução : completar com a tag </strong>;
+Linha 25 : O objeto `that` não existe, talvez fosse desejado utilizar o objeto `this`, que é uma declaração `static final` do escopo atual;
+           Solução : substituir o `that` por `this`;
