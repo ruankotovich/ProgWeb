@@ -121,11 +121,9 @@ Date:   Mon Mar 19 09:05:43 2018 -0500
 
 Questões:
 
-a) o comando `git status` tem como objetivo mostrar as transformações atuais (deleção, inserção, modificação) de arquivos no workspace em relação ao staging area.
+a) o comando `git status` tem como objetivo mostrar as transformações atuais (deleção, inserção, modificação) de arquivos no workspace(ou working directory) em relação ao staging area.
 
-O comando auxilia na sumarização do que foi feito entre o workspace e o stagind area até o momento, antes de dar o commit.
-
-Além disso, o `git status` também auxilia na verificação do status atual do nó mais acima, verificando se está em paridade com o repositório remoto.
+O comando auxilia na sumarização do que foi feito entre o workspace(ou working directory) e o staging area até o momento, antes de dar o commit.
 
 b) O arquivo `.gitignore` tem como objetivo armazenar um conjunto de arquivos que não desejamos que sejam administrado pelo git, ou seja, que não desejamos que façam parte do repositório (arquivos ignorados)
 
