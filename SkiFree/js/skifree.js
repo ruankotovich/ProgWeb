@@ -4,21 +4,30 @@
 
 (function () {
 
-  let SPEED = 20;
-  let OVERFLOW = false;
+  let OBSTACLE_CLASSES = []
+  
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(70).fill("tree"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(10).fill("big_tree"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(5).fill("flame_brush"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(5).fill("tree_trunk"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(5).fill("rock"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(50).fill("dog"));
+
   const FPS = 60;
   const TAMX = 800;
   const TAMY = 600;
-  const PROB_ARVORE = .5;
+  const PROB_OBSTACLE = .5;
   const OVERFLOW_LIMIT_LEFT = 80;
   const OVERFLOW_LIMIT_RIGHT = TAMX - OVERFLOW_LIMIT_LEFT;
+  let speed = FPS/20;
+  let overflow = false;
 
   var gameLoop;
   var montanha;
   var skier;
   var direcoes = ['para-esquerda','para-frente','para-direita']
   var horizontal_speed = [-2,0,2];
-  var arvores = [];
+  var obstacles = [];
 
   function init () {
     montanha = new Montanha();
@@ -29,6 +38,7 @@
   window.addEventListener('keydown', function (e) {
     if (e.key == 'a') skier.mudarDirecao(-1);
     else if (e.key == 'd') skier.mudarDirecao(1);
+    else if(e.key == 'f') speed = speed > FPS/20? FPS/20 : FPS/30;
   });
 
   function Montanha () {
@@ -57,26 +67,26 @@
 
         if(parseInt(this.element.style.left) > OVERFLOW_LIMIT_LEFT){
           this.element.style.left = (parseInt(this.element.style.left)+horizontal_speed[this.direcao]) + "px";
-          OVERFLOW = false;
+          overflow = false;
         }else{
-          OVERFLOW = true;
+          overflow = true;
         }
       }
       if (this.direcao == 2) {
         if(parseInt(this.element.style.left) < OVERFLOW_LIMIT_RIGHT){
           this.element.style.left = (parseInt(this.element.style.left)+horizontal_speed[this.direcao]) + "px";
-          OVERFLOW = false;
+          overflow = false;
         }else{
-          OVERFLOW = true;
+          overflow = true;
         }
       }
     }
   }
 
-  function Arvore() {
+  function Obstacle() {
     this.element = document.createElement('div');
     montanha.element.appendChild(this.element);
-    this.element.className = 'arvore';
+    this.element.className = OBSTACLE_CLASSES[Math.floor(Math.random() * OBSTACLE_CLASSES.length)];
     this.element.style.top = TAMY + "px";
     this.element.style.left = Math.floor(Math.random() * TAMX) + "px";
   }
@@ -84,14 +94,14 @@
   function run () {
     var random = Math.floor(Math.random() * 1000);
 
-    if (random <= PROB_ARVORE*10*SPEED) {
-      var arvore = new Arvore();
-      arvores.push(arvore);
+    if (random <= PROB_OBSTACLE*100*speed) {
+      var obstacle = new Obstacle();
+      obstacles.push(obstacle);
     }
 
-    arvores.forEach(function (a) {
-      a.element.style.top = (parseInt(a.element.style.top)-(FPS/SPEED)) + "px";
-      if(OVERFLOW){
+    obstacles.forEach(function (a) {
+      a.element.style.top = (parseInt(a.element.style.top)-speed) + "px";
+      if(overflow){
         a.element.style.left = (parseInt(a.element.style.left)-horizontal_speed[skier.direcao]) + "px";
       }
     });

@@ -19,12 +19,51 @@
    height: 32px;
 }
 
-.arvore {
+.dog{
+
+   background-image: url(skier.png);
+   background-position: 0px -204px;   
+   width: 20px;
+   height: 20px;   
+   position: absolute;
+}
+
+.rock{
+   background-image: url(obstacles.png);
+   background-position: -30px -31px;   
+   width: 28px;
+   height: 32px;   
+   position: absolute;
+}
+.tree_trunk{
+   background-image: url(obstacles.png);
+   background-position: -254px -31px;   
+   width: 17px;
+   height: 32px;   
+   position: absolute;
+}
+
+.big_tree {
+   background-image: url(obstacles.png);
+   background-position: -96px -66px;   
+   width: 32px;
+   height: 64px;   
+   position: absolute;
+}
+
+.tree {
    background-image: url(obstacles.png);
    background-position: -0px -31px;   
    width: 28px;
    height: 32px;   
    position: absolute;
+}
+.flame_brush{
+    background-position: -24px -103px;
+    position: absolute;
+    background-image: url(obstacles.png);
+    width: 22px;
+    height: 27px;
 }
 
 #montanha {
