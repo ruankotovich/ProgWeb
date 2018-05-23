@@ -5,7 +5,7 @@
    height: 25px;
 }
 
-.died {
+.raw-died {
    background-image: url(skier.png);
    background-position: -242px -270px;
    width: 30px;
@@ -89,6 +89,107 @@
     height: 11px;
 }
 
+
+.iceman_rstep1{
+   
+    background-position: -64px -112px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 25px;
+    height: 43px;
+}
+
+.iceman_rstep2{
+
+    background-position: -91px -112px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 30px;
+    height: 43px;
+}
+
+.iceman_lstep1{
+   
+    background-position: -66px -158px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 25px;
+    height: 43px;
+}
+
+.iceman_lstep2{
+
+    background-position: -91px -158px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 30px;
+    height: 43px;
+}
+
+.iceman_eating1{
+
+    background-position: -123px -113px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 32px;
+    height: 42px;
+}
+
+
+.iceman_eating2{
+
+    background-position: -157px -113px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 29px;
+    height: 42px;
+
+
+}
+
+.iceman_eating3{
+
+    background-position: -188px -113px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 29px;
+    height: 42px;
+}
+.iceman_eating4{
+
+    background-position: -218px -113px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 25px;
+    height: 42px;
+}
+
+.iceman_eating5{
+
+    background-position: -244px -113px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 26px;
+    height: 42px;
+}
+
+.iceman_eating6{
+
+    background-position: 0px -159px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 26px;
+    height: 42px;
+}
+
+.iceman_eating7{
+
+    background-position: -34px -113px;
+    position: absolute;
+    background-image: url(skier.png);
+    width: 28px;
+    height: 42px;
+}
 
 #montanha {
    border: 1px solid black;
