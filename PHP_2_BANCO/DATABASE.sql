@@ -39,3 +39,8 @@ CREATE TABLE `user` (
   CONSTRAINT `user_curso_FK` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.example.com' 
+    IDENTIFIED BY 'some_characters' 
+    WITH GRANT OPTION;
+FLUSH PRIVILEGES;

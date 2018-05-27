@@ -50,7 +50,7 @@
   }
 
   window.addEventListener('keydown', function (e) {
-    if (skier.notInLockdown) {
+    if (skier.notInLockdown && skier.alive){
       if (e.keyCode == 37) skier.changeDirection(-1);
       else if (e.keyCode == 39) skier.changeDirection(1);
       else if (e.keyCode == 40) speed = speed == 2 ? 3 : 2;
