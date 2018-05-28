@@ -7,16 +7,19 @@
   const END = new Audio('./sfx/end.mp3');
   const HURT = new Audio('./sfx/hurt.mp3');
   const SCREAM = new Audio('./sfx/scream.mp3');
+  const ONEUP = new Audio('./sfx/oneup.wav');
   const DYING = new Audio('./sfx/dying.mp3');
   let OBSTACLE_CLASSES = []
 
-  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(70).fill("tree"));
-  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(10).fill("big_tree"));
-  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(5).fill("flame_brush"));
-  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(5).fill("tree_trunk"));
-  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(5).fill("rock"));
-  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(2).fill("dog"));
-  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(1).fill("mushroom"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(100).fill("tree"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(20).fill("big_tree"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(10).fill("flame_brush"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(10).fill("tree_trunk"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(10).fill("rock"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(20).fill("dog"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(4).fill("mushroom"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(1).fill("nath"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(1).fill("coelinho"));
 
   const FPS = 60;
   const TAMX = 800;
@@ -35,6 +38,11 @@
   let iceman_directions = ['iceman_lstep1', 'iceman_lstep2', 'iceman_rstep1', 'iceman_rstep2'];
   let horizontal_speed = [-2, 0, 2];
   let obstacles = [];
+
+  function lateralIntersects(a, b) {
+    return !(a.x + a.width < b.x || b.x + b.width < a.x);
+  }
+
   function intersects(a, b) {
     return !(a.x + a.width < b.x || b.x + b.width < a.x || a.y + a.height < b.y || b.y + b.height < a.y)
   }
@@ -47,11 +55,20 @@
     iceman = new Iceman();
     gameLoop = setInterval(run, 1000 / FPS);
     MAIN_THEME.play();
+
+    let info = new Obstacle();
+    info.element.className = 'info';
+    obstacles.push(info);
+    info.element.style.left = `${(TAMX >> 1) - (info.getPosition().width >> 1)}px`;
+    info.notEroded = false;
   }
 
   window.addEventListener('keydown', function (e) {
-    if (skier.notInLockdown && skier.alive){
-      if (e.keyCode == 37) skier.changeDirection(-1);
+    if (skier.notInLockdown && skier.alive) {
+      if (e.key == 'a') skier.changeDirection(-1);
+      else if (e.key == 'd') skier.changeDirection(1);
+      else if (e.key == 'f') speed = speed == 2 ? 3 : 2;
+      else if (e.keyCode == 37) skier.changeDirection(-1);
       else if (e.keyCode == 39) skier.changeDirection(1);
       else if (e.keyCode == 40) speed = speed == 2 ? 3 : 2;
     }
@@ -61,7 +78,7 @@
     this.element = document.getElementById('panel');
 
     this.refresh = (skier) => {
-      this.element.innerHTML = `Distância : ${skier.distance}<br>Vidas : ${skier.lifes}<br>Velocidade : ${speed * 10}m/s`;
+      this.element.innerHTML = `<b>Distância</b></br>${skier.distance}<br><b>Velocidade</b></br>${speed * 10}km/h</br><b>Estabilidade</b></br><div class='stability' style='width:${skier.stability}%;background-color:${skier.stability > 20 ? 'aqua' : 'red'}'></div></br><br><img src='./css/heart.png' width='25px' height='25px'/>${skier.lifes}`;
     }
 
     this.finalPuntuaction = (pt) => {
@@ -113,15 +130,18 @@
 
       this.lastStep = (this.lastStep + 1) % 8;
 
-      if (pos.x > parseInt(this.computedStyle.left)) {
-        this.element.style.left = `${parseInt(this.element.style.left) + 2}px`;
+      if (lateralIntersects(this.getPosition(), skier.getPosition())) {
         this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
-      } else if (pos.x < parseInt(this.computedStyle.left)) {
-        this.element.className = `iceman_lstep${this.lastStep > 4 ? 1 : 2}`;
-        this.element.style.left = `${parseInt(this.element.style.left) - 2}px`;
       } else {
-
-        this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
+        if (pos.x > parseInt(this.computedStyle.left)) {
+          this.element.style.left = `${parseInt(this.element.style.left) + 3}px`;
+          this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
+        } else if (pos.x < parseInt(this.computedStyle.left)) {
+          this.element.className = `iceman_lstep${this.lastStep > 4 ? 1 : 2}`;
+          this.element.style.left = `${parseInt(this.element.style.left) - 3}px`;
+        } else {
+          this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
+        }
       }
 
       if (parseInt(this.element.style.top) + parseInt(this.computedStyle.height) < pos.y) {
@@ -198,6 +218,7 @@
     this.notInLockdown = true;
     this.distance = 0;
     this.lifes = 3;
+    this.stability = 100;
     this.alive = true;
     this.hitObstacle = () => {
       --this.lifes;
@@ -232,6 +253,9 @@
       this.alive = false;
       this.lifes = 0;
       speed = 0;
+      this.movement = 0;
+      this.direcao = 0;
+      overflow = false;
       panel.finalPuntuaction(this.distance);
     }
 
@@ -253,7 +277,7 @@
         if (parseInt(this.element.style.left) > OVERFLOW_LIMIT_LEFT) {
           this.element.style.left = (parseInt(this.element.style.left) + horizontal_speed[this.direcao]) + "px";
           overflow = false;
-        } else {
+        } else if (this.alive) {
           overflow = true;
         }
       }
@@ -261,7 +285,7 @@
         if (parseInt(this.element.style.left) < OVERFLOW_LIMIT_RIGHT) {
           this.element.style.left = (parseInt(this.element.style.left) + horizontal_speed[this.direcao]) + "px";
           overflow = false;
-        } else {
+        } else if (this.alive) {
           overflow = true;
         }
       }
@@ -273,9 +297,76 @@
     hill.element.appendChild(this.element);
     this.element.className = OBSTACLE_CLASSES[Math.floor(Math.random() * OBSTACLE_CLASSES.length)];
     this.element.style.top = TAMY + "px";
-    this.element.style.left = (-300 + Math.floor(Math.random() * TAMX) + 300) + "px";
+    this.element.style.left = (-500 + Math.floor(Math.random() * TAMX) + 500) + "px";
     this.computedStyle = window.getComputedStyle(this.element, null);
     this.notEroded = true;
+    if (this.element.className === 'dog') {
+
+      this.movement = ((obstacle) => {
+        let random = Math.floor(Math.random() * 200);
+
+        if (random > 70) {
+
+          setTimeout(() => {
+            obstacle.element.className = 'dog_move_1';
+            obstacle.element.style.left = `${parseInt(obstacle.element.style.left) + 2}px`;
+            setTimeout(() => {
+              obstacle.element.className = 'dog_move_2';
+              obstacle.element.style.left = `${parseInt(obstacle.element.style.left) + 2}px`;
+              setTimeout(() => {
+                obstacle.element.className = 'dog_move_1';
+                obstacle.element.style.left = `${parseInt(obstacle.element.style.left) + 2}px`;
+                setTimeout(() => {
+                  obstacle.element.className = 'dog_move_2';
+                  obstacle.element.style.left = `${parseInt(obstacle.element.style.left) + 2}px`;
+                  setTimeout(() => {
+                    obstacle.element.className = 'dog_move_1';
+                    obstacle.element.style.left = `${parseInt(obstacle.element.style.left) + 2}px`;
+                    setTimeout(() => {
+                      obstacle.element.className = 'dog_move_2';
+                      obstacle.element.style.left = `${parseInt(obstacle.element.style.left) + 2}px`;
+                      setTimeout(() => {
+                        obstacle.element.className = 'dog';
+                        if (obstacle.notEroded) {
+                          this.movement(obstacle);
+                        }
+                      }, 300);
+                    }, 300);
+                  }, 300);
+                }, 300);
+              }, 300);
+            }, 300);
+          }, 300);
+
+        }
+
+      });
+
+      this.movement(this);
+    } else if (this.element.className === 'flame_brush') {
+
+      this.movement = ((obstacle) => {
+
+        setTimeout(() => {
+          obstacle.element.className = 'flame_brush_2';
+          setTimeout(() => {
+            obstacle.element.className = 'flame_brush_3';
+            setTimeout(() => {
+              if (obstacle.notEroded) {
+                obstacle.element.className = 'flame_brush';
+                obstacle.movement(obstacle);
+              } else {
+                obstacle.element.className = 'flame_brush_off';
+              }
+            }, 200);
+          }, 200);
+        }, 200);
+
+
+      });
+
+      this.movement(this);
+    }
 
     this.getPosition = () => {
 
@@ -298,6 +389,18 @@
       obstacles.push(obstacle);
     }
 
+    if (skier.stability <= 1 && speed > 2) {
+      speed = 2;
+      stability = 100;
+      skier.hitObstacle();
+    }
+
+    if (speed == 3) {
+      skier.stability -= 0.1;
+    } else if (skier.stability < 100) {
+      skier.stability += 0.1;
+    }
+
     obstacles.forEach(function (a) {
       a.element.style.top = (parseInt(a.element.style.top) - speed) + "px";
       if (overflow) {
@@ -314,11 +417,17 @@
           if (a.element.className !== "mushroom") {
             skier.hitObstacle();
           } else {
+            ONEUP.pause();
+            ONEUP.currentTime = 0;
+            ONEUP.play();
             skier.lifes++;
+            a.element.style.display = 'none';
           }
         }
 
         nextItObstacles.push(a);
+      } else {
+        a.notEroded = false;
       }
 
     });

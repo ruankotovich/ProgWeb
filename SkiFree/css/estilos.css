@@ -33,12 +33,52 @@
    height: 32px;
 }
 
+.info {
+    position: absolute;
+    background-image: url(obstacles.png);
+    background-position: -85px -183px;
+    width: 116px;
+    height: 100px;
+ }
+
+.nath {
+    position: absolute;
+    background-image: url(obstacles.png);
+    background-position: -217px -203px;
+    width: 116px;
+    height: 77px;
+ }
+
+ .coelinho{
+     position: absolute;
+    background-image: url(obstacles.png);
+    background-position: -0px -170px;
+    width: 74px;
+    height: 40px;
+ }
+
 .dog{
    background-image: url(skier.png);
-   background-position: 0px -204px;   
-   width: 20px;
-   height: 20px;   
+   background-position: -48px -208px;   
+   width: 14px;
+   height: 15px;   
    position: absolute;
+}
+
+.dog_move_1{
+    background-image: url(skier.png);
+    background-position: -23px -208px;   
+    width: 21px;
+    height: 15px;   
+    position: absolute;
+}
+
+.dog_move_2{
+    background-image: url(skier.png);
+    background-position: 0px -208px;   
+    width: 21px;
+    height: 15px;   
+    position: absolute;
 }
 
 .rock{
@@ -70,6 +110,41 @@
    width: 28px;
    height: 32px;   
    position: absolute;
+}
+
+.flame_brush{
+    background-position: -24px -103px;
+    position: absolute;
+    background-image: url(obstacles.png);
+    width: 22px;
+    height: 27px;
+}
+
+
+.flame_brush_2{
+    background-position: -48px -103px;
+    position: absolute;
+    background-image: url(obstacles.png);
+    width: 22px;
+    height: 27px;
+}
+
+
+.flame_brush_3{
+    background-position: -72px -103px;
+    position: absolute;
+    background-image: url(obstacles.png);
+    width: 22px;
+    height: 27px;
+}
+
+
+.flame_brush_off{
+    background-position: 0px -103px;
+    position: absolute;
+    background-image: url(obstacles.png);
+    width: 22px;
+    height: 27px;
 }
 
 .flame_brush{
@@ -191,6 +266,15 @@
     height: 42px;
 }
 
+.stability{
+    border: 1px bold black;
+    background-color: aqua;
+    height: 1em;
+    align-content: center;
+    text-align: center;
+}
+
+
 #montanha {
    border: 1px solid black;
    position: relative;
@@ -205,8 +289,10 @@
 
 #panel{
     width: 20em;
-    height: 5rem;
+    height: 13em;
     border: 1px solid;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color:white;
     float: left;
 }
