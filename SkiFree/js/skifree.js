@@ -9,6 +9,8 @@
   const SCREAM = new Audio('./sfx/scream.mp3');
   const ONEUP = new Audio('./sfx/oneup.wav');
   const DYING = new Audio('./sfx/dying.mp3');
+  const ROAR = new Audio('./sfx/roar.wav');
+  const FLARE = new Audio('./sfx/flare.wav');
   let OBSTACLE_CLASSES = []
 
   OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(100).fill("tree"));
@@ -18,6 +20,7 @@
   OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(10).fill("rock"));
   OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(20).fill("dog"));
   OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(4).fill("mushroom"));
+  OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(40).fill("flare"));
   OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(1).fill("nath"));
   OBSTACLE_CLASSES = OBSTACLE_CLASSES.concat(Array(1).fill("coelinho"));
 
@@ -53,14 +56,15 @@
     panel = new LateralPanel();
     panel.refresh(skier);
     iceman = new Iceman();
-    gameLoop = setInterval(run, 1000 / FPS);
     MAIN_THEME.play();
 
     let info = new Obstacle();
     info.element.className = 'info';
-    obstacles.push(info);
+    info.element.style.top = `120px`;
     info.element.style.left = `${(TAMX >> 1) - (info.getPosition().width >> 1)}px`;
     info.notEroded = false;
+    obstacles.push(info);
+    gameLoop = setInterval(run, 1000 / FPS);
   }
 
   window.addEventListener('keydown', function (e) {
@@ -100,6 +104,7 @@
     this.computedStyle = window.getComputedStyle(this.element, null);
     this.lastStep = 1;
     this.online = false;
+    this.notStuned = true;
 
     this.start = () => {
       this.online = true;
@@ -112,7 +117,9 @@
 
 
     this.stop = () => {
+      hill.nextIceman = skier.distance+ 2000;
       this.online = false;
+      this.notStuned = true;
       this.rebuild();
       BOSS_THEME.currentTime = MAIN_THEME.currentTime = 0;
       BOSS_THEME.pause();
@@ -122,82 +129,87 @@
 
     this.rebuild = () => {
       this.element.style.top = '-50px';
-      this.element.style.left = parseInt(TAMX) >> 1 + parseInt(this.computedStyle.height) >> 1;
+      this.element.style.left = `${(parseInt(TAMX) >> 1) - (parseInt(this.computedStyle.height) >> 1)}px`;
     }
 
     this.walk = (skier) => {
-      let pos = skier.getPosition();
 
-      this.lastStep = (this.lastStep + 1) % 8;
+      if (this.notStuned) {
 
-      if (lateralIntersects(this.getPosition(), skier.getPosition())) {
-        this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
-      } else {
-        if (pos.x > parseInt(this.computedStyle.left)) {
-          this.element.style.left = `${parseInt(this.element.style.left) + 3}px`;
-          this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
-        } else if (pos.x < parseInt(this.computedStyle.left)) {
-          this.element.className = `iceman_lstep${this.lastStep > 4 ? 1 : 2}`;
-          this.element.style.left = `${parseInt(this.element.style.left) - 3}px`;
+        let pos = skier.getPosition();
+
+        this.lastStep = (this.lastStep + 1) % 8;
+
+        if (lateralIntersects(this.getPosition(), skier.getPosition())) {
+          this.element.className = `iceman_${pos.x > parseInt(this.computedStyle.left)? 'r' : 'l'}step${this.lastStep > 4 ? 1 : 2}`;
         } else {
-          this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
+          if (pos.x > parseInt(this.computedStyle.left)) {
+            this.element.style.left = `${parseInt(this.element.style.left) + 3}px`;
+            this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
+          } else if (pos.x < parseInt(this.computedStyle.left)) {
+            this.element.className = `iceman_lstep${this.lastStep > 4 ? 1 : 2}`;
+            this.element.style.left = `${parseInt(this.element.style.left) - 3}px`;
+          } else {
+            this.element.className = `iceman_rstep${this.lastStep > 4 ? 1 : 2}`;
+          }
         }
-      }
 
-      if (parseInt(this.element.style.top) + parseInt(this.computedStyle.height) < pos.y) {
+        if (parseInt(this.element.style.top) + parseInt(this.computedStyle.height) < pos.y) {
 
-        if (parseInt(this.element.style.top) < -80) {
-          this.stop();
+          if (parseInt(this.element.style.top) < -80) {
+            this.stop();
+          }
+
+          this.element.style.top = `${parseFloat(this.element.style.top) + (2.8 - speed)}px`
+        } else {
+          this.element.style.top = `${parseFloat(this.element.style.top) - 0.1}px`
         }
 
-        this.element.style.top = `${parseFloat(this.element.style.top) + (2.8 - speed)}px`
-      } else {
-        this.element.style.top = `${parseFloat(this.element.style.top) - 0.1}px`
-      }
+        if (intersects(this.getPosition(), skier.getPosition())) {
+          skier.die();
+          skier.element.style.display = 'none';
 
-      if (intersects(this.getPosition(), skier.getPosition())) {
-        skier.die();
-        skier.element.style.display = 'none';
-
-        setTimeout(() => {
-          this.element.className = 'iceman_eating1';
           setTimeout(() => {
-            this.element.className = 'iceman_eating2';
+            this.element.className = 'iceman_eating1';
             setTimeout(() => {
-              this.element.className = 'iceman_eating3';
+              this.element.className = 'iceman_eating2';
               setTimeout(() => {
-                this.element.className = 'iceman_eating4';
+                this.element.className = 'iceman_eating3';
                 setTimeout(() => {
-                  this.element.className = 'iceman_eating5';
+                  this.element.className = 'iceman_eating4';
                   setTimeout(() => {
-                    this.element.className = 'iceman_eating6';
+                    this.element.className = 'iceman_eating5';
                     setTimeout(() => {
-                      this.element.className = 'iceman_eating5';
+                      this.element.className = 'iceman_eating6';
                       setTimeout(() => {
-                        this.element.className = 'iceman_eating6';
+                        this.element.className = 'iceman_eating5';
                         setTimeout(() => {
-                          this.element.className = 'iceman_eating7';
-                          SCREAM.play();
-                        }, 500);
+                          this.element.className = 'iceman_eating6';
+                          setTimeout(() => {
+                            this.element.className = 'iceman_eating7';
+                            SCREAM.play();
+                          }, 500);
 
-                      }, 600);
+                        }, 600);
 
-                    }, 500);
-                  }, 700);
+                      }, 500);
+                    }, 700);
+
+                  }, 400);
 
                 }, 400);
-
               }, 400);
+              DYING.play();
             }, 400);
-            DYING.play();
-          }, 400);
 
-        }, 100);
+          }, 100);
 
+        }
+
+      } else {
+        this.element.style.top = `${(parseInt(this.element.style.top) - speed)}px`;
       }
-
     }
-
 
     this.getPosition = () => {
       let x0 = parseInt(this.computedStyle.left);
@@ -300,6 +312,12 @@
     this.element.style.left = (-500 + Math.floor(Math.random() * TAMX) + 500) + "px";
     this.computedStyle = window.getComputedStyle(this.element, null);
     this.notEroded = true;
+    this.notSafe = true;
+
+    if (this.element.className === 'mushroom' || this.element.className === 'flare' || this.element.className === 'info') {
+      this.notSafe = false;
+    }
+
     if (this.element.className === 'dog') {
 
       this.movement = ((obstacle) => {
@@ -414,14 +432,38 @@
           console.log(positionObstacle, '<->', positionSkier);
           a.notEroded = false;
           console.log(a.element.className);
-          if (a.element.className !== "mushroom") {
+          if (a.notSafe) {
             skier.hitObstacle();
           } else {
-            ONEUP.pause();
-            ONEUP.currentTime = 0;
-            ONEUP.play();
-            skier.lifes++;
-            a.element.style.display = 'none';
+            switch (a.element.className) {
+              case 'mushroom': {
+                ONEUP.pause();
+                ONEUP.currentTime = 0;
+                ONEUP.play();
+                skier.lifes++;
+                a.element.style.display = 'none';
+              } break;
+              case 'flare': {
+                FLARE.pause();
+                FLARE.currentTime = 0;
+                FLARE.play();
+                a.element.className = 'flare_on';
+                if (iceman.online) {
+                  iceman.notStuned = false;
+                  iceman.element.className = 'iceman_stuned';
+                  setTimeout(() => {
+                    ROAR.play();
+                    ROAR.currentTime = 0;
+                    ROAR.play();
+                    iceman.notStuned = true;
+                  }, 500);
+                }
+              } break;
+              default: {
+
+              } break;
+            }
+
           }
         }
 
@@ -437,7 +479,6 @@
       if (skier.distance >= hill.nextIceman) {
         if (!iceman.online) {
           iceman.start();
-          hill.nextIceman += 2000;
         }
       }
 
