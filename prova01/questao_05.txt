@@ -1,3 +1,6 @@
+Logs e conceitos reportados corretamente.
+Nota: 2.0
+
 Histórico de commis :
 
 --- START ---
@@ -130,3 +133,5 @@ b) O arquivo `.gitignore` tem como objetivo armazenar um conjunto de arquivos qu
 Esse comportamento é desejado uma vez que, em certos cenários, possuímos arquivos gerados automaticamente com alguma informação relativa ao computador atual que está administrando
 o repositório local, e isso não é do interesse de quem acessa o repositório remoto, já que isso pode causar conflito nos arquivos gerados entre os nós que compartilham
 o repositório remoto.
+
+

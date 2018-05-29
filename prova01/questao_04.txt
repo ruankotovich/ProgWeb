@@ -1,3 +1,6 @@
+Conceito de hoisting e código corretos.
+Nota: 2.0
+
 Hoisting diz respeito à uma característica da linguagem de adiantar(hoist) a declaração de uma variável para o inicio do escopo no qual ela está inserida.
 
 Essa característica permite a utilização da variável mesmo que esta tenha sido declarada (mas não atribuída com o operador =)

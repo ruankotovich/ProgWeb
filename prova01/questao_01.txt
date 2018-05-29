@@ -1,3 +1,6 @@
+Todos os erros foram identificados corretamente.
+Nota: 2.0
+
 Linha 08 : Os valores em CSS são atribuídos com o operador `:`, e nessa linha estão sendo atribuídos com o operador`=`
            Solução : atribuir os valores com o operador `:`
 Linha 09 : Os atributos em CSS são atribuidos com o operador `:`, e nessa linha estão sendo atribuídos com o operador`=`;
