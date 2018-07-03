@@ -8,6 +8,8 @@ use common\models\CursoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+
 
 /**
  * CursoController implements the CRUD actions for Curso model.
@@ -131,5 +133,9 @@ class CursoController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function getAll(){
+        return ArrayHelper::map(Curso::find()->all(), 'id','nome');
     }
 }
