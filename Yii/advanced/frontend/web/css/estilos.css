@@ -329,7 +329,7 @@
 }
 
 
-#panel{
+.panel{
     width: 20em;
     height: 13em;
     border: 1px solid;
