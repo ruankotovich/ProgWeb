@@ -12,7 +12,8 @@ class JogoController extends Controller
     public function actionIndex()
     {
         return $this->render('index', [
-            'user' => Yii::$app->user->identity
+            'user' => Yii::$app->user->identity,
+            'isGuest' => Yii::$app->user->isGuest
         ]);
     }
 }

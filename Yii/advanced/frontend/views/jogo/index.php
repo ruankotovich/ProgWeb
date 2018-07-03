@@ -18,6 +18,9 @@ $this->title = 'Yiieti';
 </head>
 
 <body>
+<?php
+    if(!$isGuest):
+?>
 <div style="position:absolute">
     <h1>Прибет, <?=$user->username ?>!</h1>
     <div id="montanha">
@@ -29,6 +32,15 @@ $this->title = 'Yiieti';
    
    <?php $this->registerJsFile('js/skifree.js'); ?>
    </div>
+<?php
+    else:
+?>
+<center><h1><font color='red'>ты не вошел!</font></h1>
+<?= Html::a('Логин', ['/site/login'], ['class' => 'btn btn-primary']) ?>
+</center>
+<?php
+    endif;
+?>
 </body>
 
 </html>
