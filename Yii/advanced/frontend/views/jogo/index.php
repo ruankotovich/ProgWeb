@@ -21,14 +21,12 @@ $this->title = 'Yiieti';
 
 <script>
 const URL = "<?=Url::to(['jogo/save'])?>";
-const USER_ID = "<?=$isGuest ? 0 : $user->id?>"
     savePuntuaction = (pt) => {
       $.ajax({
         type: 'GET',
         url: URL,
         data: {
-          'pontuacao': pt,
-          'userId': USER_ID?>,
+          'pontuacao': pt
         },
         error: function () {
           console.log('Deu algum erro!');
@@ -46,7 +44,6 @@ if (!$isGuest):
 ?>
 <div style="position:absolute">
     <h1>Прибет, <?=$user->username?>!</h1>
-    <?php if (!isset($pontuacao)) {$pontuacao = 0;}?>
     <div id="montanha">
         <div id="skier"></div>
     </div>
