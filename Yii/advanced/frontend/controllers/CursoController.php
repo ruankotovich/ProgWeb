@@ -52,8 +52,16 @@ class CursoController extends Controller
      */
     public function actionView($id)
     {
+        try{
+            $curModel = $this->findModel($id);
+        }catch(NotFoundHttpException $ex){
+            $curModel = Curso::findOne(Yii::$app->user->identity->id_curso);
+        }catch(BadRequestHttpException $ex){
+            $curModel = Curso::findOne(Yii::$app->user->identity->id_curso);
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $curModel, 'val' => Yii::$app->user->identity->id_curso
         ]);
     }
 
