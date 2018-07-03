@@ -124,4 +124,8 @@ class UserController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    function countByCourse($idCurso){
+        return User::find()->where('id_curso='.$idCurso)->count();
+    }
 }

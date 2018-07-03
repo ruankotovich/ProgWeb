@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome',
             'sigla',
             'descricao',
+            [
+                'attribute'=>'Total de alunos',
+                'value'=>$count
+            ]
         ],
     ]) ?>
 

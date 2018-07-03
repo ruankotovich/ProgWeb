@@ -63,7 +63,9 @@ class CursoController extends Controller
         }
 
         return $this->render('view', [
-            'model' => $curModel, 'val' => Yii::$app->user->identity->id_curso
+            'model' => $curModel,
+            'count' => UserController::countByCourse($curModel->id)
+
         ]);
     }
 
