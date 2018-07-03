@@ -70,6 +70,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -140,7 +141,7 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        return $this->render('about',['curDate'=>date('d/M/y')]);
     }
 
     /**
