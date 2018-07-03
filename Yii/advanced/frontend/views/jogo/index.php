@@ -1,6 +1,7 @@
 
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'Yiieti';
@@ -16,13 +17,34 @@ $this->title = 'Yiieti';
     <title>Skifree</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+const URL = "<?= Url::to(['jogo/save']) ?>";
 
+    savePuntuaction = (pt) => {
+      $.ajax({
+        type: 'GET',
+        url: URL,
+        data: {
+          'pontuacao': pt
+        },
+        error: function () {
+          console.log('Deu algum erro!');
+        },
+        success: function (data) {
+          console.log("Foi Sucessão");
+        }
+      });
+    }
+</script>
 <body>
 <?php
     if(!$isGuest):
 ?>
 <div style="position:absolute">
     <h1>Прибет, <?=$user->username ?>!</h1>
+    <?php if(!isset($pontuacao)){$pontuacao = 0;} ?>
+    Ты пунтуация это <?= $pontuacao ?>
     <div id="montanha">
         <div id="skier"></div>
     </div>

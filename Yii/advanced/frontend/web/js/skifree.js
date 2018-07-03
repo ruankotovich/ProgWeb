@@ -87,7 +87,9 @@
 
     this.finalPuntuaction = (pt) => {
       this.element.innerHTML = `<center><b><font color='red'>Você morreu!</font></b><br>Sua pontuação é <b>${pt}.</b><br><a href='javascript:window.location.href=window.location.href'>Tentar Novamente</a></center>`;
+      savePuntuaction(pt);
     }
+
   }
 
   function Hill() {
@@ -117,7 +119,7 @@
 
 
     this.stop = () => {
-      hill.nextIceman = skier.distance+ 2000;
+      hill.nextIceman = skier.distance + 2000;
       this.online = false;
       this.notStuned = true;
       this.rebuild();
@@ -141,7 +143,7 @@
         this.lastStep = (this.lastStep + 1) % 8;
 
         if (lateralIntersects(this.getPosition(), skier.getPosition())) {
-          this.element.className = `iceman_${pos.x > parseInt(this.computedStyle.left)? 'r' : 'l'}step${this.lastStep > 4 ? 1 : 2}`;
+          this.element.className = `iceman_${pos.x > parseInt(this.computedStyle.left) ? 'r' : 'l'}step${this.lastStep > 4 ? 1 : 2}`;
         } else {
           if (pos.x > parseInt(this.computedStyle.left)) {
             this.element.style.left = `${parseInt(this.element.style.left) + 3}px`;
@@ -229,7 +231,7 @@
     this.computedStyle = window.getComputedStyle(this.element, null);
     this.notInLockdown = true;
     this.distance = 0;
-    this.lifes = 3;
+    this.lifes = 0;
     this.stability = 100;
     this.alive = true;
     this.hitObstacle = () => {
