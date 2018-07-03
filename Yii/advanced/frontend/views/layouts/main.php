@@ -39,10 +39,10 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Sobre', 'url' => ['/site/about']],
         ['label' => 'Contato', 'url' => ['/site/contact']],
+        ['label' => 'Cursos', 'url' => ['/curso/index']],
+        ['label' => 'Usuários', 'url' => ['/user/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Cursos', 'url' => ['/curso/index']];
-        $menuItems[] = ['label' => 'Usuários', 'url' => ['/user/index']];
         $menuItems[] = ['label' => 'Cadastro', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
