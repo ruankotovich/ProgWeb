@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use yii\data\ActiveDataProvider;
 
 
 /**
@@ -119,6 +120,13 @@ class CursoController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionUsers($id){
+        $users = UserController::getByCourse($id);
+        $course = $this->findModel($id);
+
+        return $this->render('users', ['course'=>$course, 'users'=>new ActiveDataProvider(['query'=>$users])]);
     }
 
     /**
