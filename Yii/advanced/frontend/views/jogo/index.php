@@ -21,7 +21,7 @@ $this->title = 'Yiieti';
 
 <script>
 const URL = "<?=Url::to(['jogo/save'])?>";
-const USER_ID = "<?= $isGuest?0:$user->id ?>"
+const USER_ID = "<?=$isGuest ? 0 : $user->id?>"
     savePuntuaction = (pt) => {
       $.ajax({
         type: 'GET',
@@ -56,14 +56,17 @@ if (!$isGuest):
     <center><b>Ranking</b></center>
 
     <?php
-    $iterator = 1;
-        foreach($ranking as $item){
-            $username = $item->user->username;
-            echo "<div style='vertical-aligh:middle'><img src='gfx/medal_$iterator.png' width='35em'/>&nbsp;<font color='red'>$iterator º &nbsp;&nbsp;</font> $username - $item->pontuacao<br></div>";
-            $iterator++;
-        }
-    ?>
-
+$iterator = 1;
+foreach ($ranking as $item) {
+    $username = $item->user->username;
+    echo "<div style='vertical-aligh:middle'><img src='gfx/medal_$iterator.png' width='35em'/>&nbsp;<font color='red'>$iterator º &nbsp;&nbsp;</font> $username - $item->pontuacao<br></div>";
+    $iterator++;
+}
+?>
+<br><br>
+<center>
+        <?=Html::a('Ver Ranking Geral', ['/jogo/ranking'], ['class' => 'btn btn-primary'])?>
+</center>
     </div>
    </div>
    <?php $this->registerJsFile('js/skifree.js');?>

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Jogada;
 use Yii;
 use yii\web\Controller;
+use yii\data\ActiveDataProvider;
 
 /**
  * JogoController implements the CRUD actions for Jogada model.
@@ -16,7 +17,7 @@ class JogoController extends Controller
         return $this->render('index', [
             'user' => Yii::$app->user->identity,
             'isGuest' => Yii::$app->user->isGuest,
-            'ranking' => $this->getRanking(3),
+            'ranking' => $this->getRanking(3)->all(),
         ]);
     }
     public function actionSave($pontuacao, $userId)
@@ -28,12 +29,19 @@ class JogoController extends Controller
         $round->save();
     }
 
+    public function actionRanking(){
+        return $this->render('ranking',
+        [
+            'ranking' => new ActiveDataProvider(['query'=>$this->getRanking(0)])
+        ]);
+    }
+
     public function getRanking($limit)
     {
         if ($limit > 0) {
-            return Jogada::find()->with('user')->orderBy('pontuacao desc')->limit($limit)->all();
+            return Jogada::find()->with('user')->orderBy('pontuacao desc')->limit($limit);
         } else {
-            return Jogada::find()->with('user')->orderBy('pontuacao desc')->all();
+            return Jogada::find()->with('user')->orderBy('pontuacao desc');
         }
     }
 }
