@@ -23,6 +23,8 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $parsedCurso;
+
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
@@ -186,5 +188,31 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+      /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Nome de usuário',
+            'password_reset_token' => 'Token de Redefinição',
+            'created_at' => 'Data de criação',
+            'updated_at' => 'Data de modificação',
+        ];
+    }
+
+    public function getCurso() {
+        return $this->hasOne(
+            Curso::className(), ['id' => 'id_curso']
+        );
+    }
+
+    public function afterFind()
+    {
+        $this->username = ucwords(strtolower($this->username));
+        $this->created_at = date('d/m/Y', $this->created_at);
+        $this->updated_at = date('d/m/Y', $this->updated_at);
     }
 }
