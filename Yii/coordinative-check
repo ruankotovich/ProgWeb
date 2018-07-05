@@ -3,13 +3,13 @@
 [X] YII3 - Tabela Criada / database na raiz da aplicação
 [X] YII4 - Modelos Criados
 [X] YII5 - CRUDS criados
-[ ] YII6 - Regras criadas
-[ ] YII7 - Labels editados como o desejado
+[X] YII6 - Regras criadas
+[X] YII7 - Labels editados como o desejado
 [X] YII8 - Opções extras adicionadas
 [X] YII9 - Títulos das views modificadas
 [X] YII10 - Id do curso na view de curso apagado
 [X] YII11 - Imagem adicionada na MAIN
-[ ] YII12 - Edições na view de Users/view
+[X] YII12 - Edições na view de Users/view
 [X] YII13 - Carregar id de curso do próprio usuário
 [X] YII14 - Input do nome do curso do signup trocado para dropdown
 [X] YII15 - Itens alinhados / count utilizado

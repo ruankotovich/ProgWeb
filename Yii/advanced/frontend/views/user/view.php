@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\User */
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Usuários', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'password_reset_token',
             'email:email',
             ['attribute'=>'id_curso','value'=>$model->curso->nome],
-            'status',
+            // 'status',
             'created_at',
             'updated_at',
         ],

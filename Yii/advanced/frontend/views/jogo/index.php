@@ -70,8 +70,8 @@ foreach ($ranking as $item) {
 <?php
 else:
 ?>
-<center><h1><font color='red'>ты не вошел!</font></h1>
-<?=Html::a('Логин', ['/site/login'], ['class' => 'btn btn-primary'])?>
+<center><h1><font color='red'>Você não está conectado.</font></h1>
+<?=Html::a('Fazer Login', ['/site/login'], ['class' => 'btn btn-primary'])?>
 </center>
 <?php
 endif;
