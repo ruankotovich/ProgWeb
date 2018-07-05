@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    Se esqueceu sua senha você pode <?= Html::a('reiniciá-la', ['site/request-password-reset']) ?>.
                 </div>
 
                 <div class="form-group">
