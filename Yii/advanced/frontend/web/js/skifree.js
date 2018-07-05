@@ -75,6 +75,8 @@
       else if (e.keyCode == 37) skier.changeDirection(-1);
       else if (e.keyCode == 39) skier.changeDirection(1);
       else if (e.keyCode == 40) speed = speed == 2 ? 3 : 2;
+    }else{
+      if (e.keyCode == 13) window.location = window.location;
     }
   });
 
@@ -86,7 +88,7 @@
     }
 
     this.finalPuntuaction = (pt) => {
-      this.element.innerHTML = `<center><b><font color='red'>Você morreu!</font></b><br>Sua pontuação é <b>${pt}.</b><br><a href='javascript:window.location.href=window.location.href'>Tentar Novamente</a></center>`;
+      this.element.innerHTML = `<center><b><font color='red'>Você morreu!</font></b><br>Sua pontuação é <b>${pt}.</b><br><a href='javascript:window.location.href=window.location.href'>Tentar Novamente <img width='30em'i src='css/enter.png'></a></center>`;
       savePuntuaction(pt);
     }
 
