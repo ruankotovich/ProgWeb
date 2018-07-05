@@ -5,6 +5,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'Yiieti';
+
 ?>
 
 <!DOCTYPE html>
@@ -17,27 +18,6 @@ $this->title = 'Yiieti';
     <title>Skifree</title>
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-
-<script>
-const URL = "<?=Url::to(['jogo/save'])?>";
-    savePuntuaction = (pt) => {
-      $.ajax({
-        type: 'GET',
-        url: URL,
-        data: {
-          'pontuacao': pt
-        },
-        error: function () {
-          console.log('Deu algum erro!');
-        },
-        success: function (data) {
-          console.log("Foi Sucessão");
-        }
-      });
-    }
-</script>
-
 <body>
 <?php
 if (!$isGuest):
@@ -66,7 +46,39 @@ foreach ($ranking as $item) {
 </center>
     </div>
    </div>
-   <?php $this->registerJsFile('js/skifree.js');?>
+   <?php
+
+$URL = Url::to(['jogo/save']);
+
+$script = <<< JS
+     _GLOBAL_SKIFREE_savePuntuaction = (pt)=>{
+      $.ajax({
+        type: 'GET',
+        url: '$URL',
+        data: {
+          'pontuacao': pt
+        },
+        error: function (err) {
+          console.log('Deu algum erro!');
+        },
+        success: function (data) {
+          console.log("Foi Sucessão");
+        }
+      });
+    }
+
+$( document ).ready(function() {
+  $.getScript( "js/skifree.js", function( data, textStatus, jqxhr ) {
+  console.log( jqxhr.status ); // 200
+  console.log( "Load was performed." );
+});
+});
+
+JS;
+
+$this->registerJs($script);
+?>
+
 <?php
 else:
 ?>

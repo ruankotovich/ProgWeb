@@ -89,7 +89,7 @@
 
     this.finalPuntuaction = (pt) => {
       this.element.innerHTML = `<center><b><font color='red'>Você morreu!</font></b><br>Sua pontuação é <b>${pt}.</b><br><a href='javascript:window.location.href=window.location.href'>Tentar Novamente <img width='30em'i src='css/enter.png'></a></center>`;
-      savePuntuaction(pt);
+      _GLOBAL_SKIFREE_savePuntuaction(pt);
     }
 
   }
@@ -233,7 +233,7 @@
     this.computedStyle = window.getComputedStyle(this.element, null);
     this.notInLockdown = true;
     this.distance = 0;
-    this.lifes = 0;
+    this.lifes = 3;
     this.stability = 100;
     this.alive = true;
     this.hitObstacle = () => {
